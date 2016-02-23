@@ -1,0 +1,91 @@
+*:focus {
+    outline: none;  
+}
+.hmpdfedit {
+    border:1px #A9A9A9 solid;
+    width:500px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius: 3px;
+    max-height: 500px;
+    overflow: auto;
+}
+.hmpdfedit .toolbar {
+    position:relative;
+    z-index:10;
+    height:41px;
+    background-image:url('img/toolbar.png');
+    background-repeat:repeat-x;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius: 3px;
+    overflow:hidden;
+    display:none;
+}
+.hmpdfedit .toolbar .button {
+    width:36px;
+    height:34px;
+    float:left;
+    background-image:url('img/break.png');
+    background-repeat:no-repeat;
+    background-position:right 4px;
+    cursor:pointer;
+}
+.hmpdfedit .toolbar .button:hover,
+.hmpdfedit .toolbar .button.on {
+    background-color:#E5E8EF;
+    border:1px #C9D0DA solid;
+    border-top:none;
+    margin-left:-1px;
+    width:35px;
+}
+.hmpdfedit .toolbar .button.first:hover {
+    border-left:none;
+    margin-left:0px;
+    -moz-border-top-left-radius:3px;
+    -webkit-border-top-left-radius:3px;
+    border-top-left-radius: 3px;
+}
+.hmpdfedit .toolbar .button div,
+.hmpdfedit .toolbar .button a {
+    background-repeat:no-repeat;
+    background-position:center center;
+    display:block;
+    width:100%;
+    height:34px;
+}
+.hmpdfedit .toolbar .button [command='underline'] {
+    background-image:url('img/underline.png');
+}
+.hmpdfedit .toolbar .button [command='italic'] {
+    background-image:url('img/italic.png');
+}
+.hmpdfedit .toolbar .button [command='bold'] {
+    background-image:url('img/bold.png');
+}
+.hmpdfedit .toolbar .button [command='insertUnorderedList'] {
+    background-image:url('img/bullet.png');
+}
+.hmpdfedit .toolbar .button [command='html'] {
+    background-image:url('img/html.png');
+}
+.hmpdfedit .toolbar .button [command='href'] {
+    background-image:url('img/href.png');
+}
+.hmpdfedit .toolbar .button [command='save'] {
+    background-image:url('img/save.png');
+}
+.hmpdfedit .editor {
+    position:relative;
+    z-index:1;
+    min-height:150px;
+    padding:10px;
+}
+.hmpdfedit .html_editor {
+    width:95%;
+    resize: none;
+    padding:10px;
+    border:0px;
+    display:none;
+    min-height:140px;
+}
