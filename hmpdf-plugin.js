@@ -41,8 +41,18 @@
     }
 
     function loadObjectEvents(){
-	$(document).on("mousedown", ".hmpdf-isobject", function(){
+	$(document).on("mousedown", ".hmpdf-main-editablearea", function(){
+		$.fn.hmpdf.selectedObj = null;
+		$(".hmpdf-isobject").css("border", "none");
+		$(".ui-icon-gripsmall-diagonal-se").css("display", "none");
+	});
+	$(document).on("mousedown", ".hmpdf-isobject", function(e){
+		e.stopPropagation();
 		$.fn.hmpdf.selectedObj = $(this);
+		$(".hmpdf-isobject").css("border", "none");
+		$(".ui-icon-gripsmall-diagonal-se").css("display", "none");
+		$(this).css("border", "1px dashed #999999");
+		$(this).find(".ui-icon-gripsmall-diagonal-se").css("display", "table");
 	}).on("keydown", function(e){
 		if($.fn.hmpdf.selectedObj != undefined){
 			if(e.keyCode == 46){ //is delete key
@@ -72,7 +82,7 @@
 	imageTool($toolsDiv);
 	squareTool($toolsDiv);
 	circleTool($toolsDiv);
-	//lineTool(toolsDiv);
+	colorTool($toolsDiv);
     }
 
     function fullTextTool($toolsDiv){
@@ -82,7 +92,7 @@
     }
 
     function imageTool($toolsDiv){
-	$objDivTool = createBasicTool($toolsDiv, "imagetool.png");
+	var $objDivTool = createBasicTool($toolsDiv, "imagetool.png");
 	$objDivTool.on("click", function(){
 		$objFile = $("<input>").attr("type", "file").css("display", "none").attr("accept", "image/*");
 		$("body").append($objFile);
@@ -94,26 +104,34 @@
 	});
     }
 
-    function squareTool($toolsDiv){
-	$objDivTool = createBasicTool($toolsDiv, "squaretool.png");
+
+    function colorTool($toolsDiv){
+	var $objDivTool = createBasicTool($toolsDiv, "colorstool.png");
 	$objDivTool.on("click", function(){
-		$objDivObj = createBasicObject();
+		
+	});
+    }
+
+    function squareTool($toolsDiv){
+	var $objDivTool = createBasicTool($toolsDiv, "squaretool.png");
+	$objDivTool.on("click", function(){
+		var $objDivObj = createBasicObject();
 		$objDivObj.append($("<div>").addClass("hmpdf-object-html").addClass("hmpdf-object-geoform").addClass("hmpdf-object-square"));
 		makeDraggable($objDivObj);
 	});
     }
 
     function circleTool($toolsDiv){
-	$objDivTool = createBasicTool($toolsDiv, "circletool.png");
+	var $objDivTool = createBasicTool($toolsDiv, "circletool.png");
 	$objDivTool.on("click", function(){
-		$objDivObj = createBasicObject();
+		var $objDivObj = createBasicObject();
 		$objDivObj.append($("<div>").addClass("hmpdf-object-html").addClass("hmpdf-object-geoform").addClass("hmpdf-object-circle"));
 		makeDraggable($objDivObj);
 	});
     }
 
     function pdfTool($toolsDiv){
-	$objDivTool = createBasicTool($toolsDiv, "pdftool.png");
+	var $objDivTool = createBasicTool($toolsDiv, "pdftool.png");
 	$objDivTool.on("click", function(){
 		$(".hmpdf-main-editablearea .hmpdf-isobject").css("border", "none");
 		$(".hmpdf-object-circle").css("border-radius", "2000px");
@@ -130,7 +148,7 @@
 	if (input.files && input.files[0]) {
 		var _reader = new FileReader();
 		_reader.onload = function(e) {
-		$objDivObj = createBasicObject();
+		var $objDivObj = createBasicObject();
 			$objDivObj.append($("<img>").addClass("hmpdf-object-html").attr("src", e.target.result));
 			makeDraggable($objDivObj);
 		}
@@ -140,9 +158,9 @@
     }
 
     function textTool($toolsDiv){
-	$objDivTool = createBasicTool($toolsDiv, "texttool.png");
+	var $objDivTool = createBasicTool($toolsDiv, "texttool.png");
 	$objDivTool.on("click", function(){
-		$objDivObj = createBasicObject();
+		var $objDivObj = createBasicObject();
 		$objDivObj.append($("<p>").addClass("hmpdf-object-html").html("Text"));
 		makeDraggable($objDivObj);
 		$objDivObj.on("dblclick", function(){
@@ -163,7 +181,7 @@
     }
 
     function createBasicTool($toolsDiv, imgname){
-	$objDivTool = $("<div>");
+	var $objDivTool = $("<div>");
 	$objDivTool.addClass("hmpdf-istool");
 	$objDivTool.css("background", "url(img/" + imgname + ") no-repeat");
 	$objDivTool.css({
@@ -179,11 +197,13 @@
 	var $objDivTool = $("<div>");
 	$objDivTool.addClass("hmpdf-isdraggable");
 	$objDivTool.addClass("hmpdf-isobject");
+	$(".hmpdf-isobject").css("border", "none");
+	$(".ui-icon-gripsmall-diagonal-se").css("display", "none");
 	return $objDivTool;
     }
 
     function createModal(){
-	$overlay = $("<div/>");
+	var $overlay = $("<div/>");
 	$overlay.css({
 		width: "100%",
 		height: "100%",
@@ -195,7 +215,7 @@
 		
 	});
 	$("body").append($overlay);
-	$obj = $("<div/>");
+	var $obj = $("<div/>");
 	
 	$obj.addClass("hmpdf-screen-modaleditor");
 	$obj.css({
