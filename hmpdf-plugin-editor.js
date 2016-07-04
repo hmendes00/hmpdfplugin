@@ -13,9 +13,11 @@
         "undefined" == typeof a.fn.hmpdfedit.counter ? a.fn.hmpdfedit.counter = 1 : a.fn.hmpdfedit.counter++;
         for (var b = a.fn.hmpdfedit.counter, c = a.extend({
             animation: !0,
-            buttons: "bold italic underline insertUnorderedList href html save".split(" ")
-        }, c), g = '<div class="hmpdfedit" hmpdfeditor="' + b + '"><div class="toolbar">', j = 0; j < c.buttons.length; j++)
-            firstline = 0 == j ? " first" : "", g = g + '<div class="button' + firstline + '"><a href="#" command="' + c.buttons[j] + '"></a></div>';
+            buttons: "_fontSize bold italic underline insertUnorderedList href html save".split(" ")
+        }, c), g = '<div class="hmpdfedit" hmpdfeditor="' + b + '"><div class="toolbar">', j = 0; j < c.buttons.length; j++){
+        console.log(c.buttons[j].startsWith("_"));
+            firstline = 0 == j ? "" : "", g = g + '<div class="button' + firstline + '">' + (c.buttons[j].startsWith("_") ? '<input type="text" style="width: 29px;text-align: center;margin: 8px 1px;" command="' + c.buttons[j] + '" />' : '<a href="#" command="' + c.buttons[j] + '"></a>') + '</div>';
+            }
         g = g + '</div><div class="editor" contenteditable="true">' + f.val() + '</div><textarea class="html_editor">' + f.val() + "</textarea></div>";
         f.hide();
         f.after(g);

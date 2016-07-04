@@ -170,6 +170,21 @@
 			$(".hmpdf-screen-modaleditor .toolbar [command=save]").on("click", function(){
 				$objDivObj.find(".hmpdf-object-html").html($(".hmpdf-screen-modaleditor .editor").html());
 			});
+			$(".hmpdf-screen-modaleditor .toolbar [command=_fontSize]").on("keyup", function(){
+				if($(".hmpdf-screen-modaleditor .editor .sizer").length > 0)
+					$(".hmpdf-screen-modaleditor .editor .sizer").css("font-size", $(this).val() + "px");
+				else
+					$(".hmpdf-screen-modaleditor .editor").html(
+						"<sizer class='sizer' style='font-size: "+$(this).val() + "px"+"'>" + $(".hmpdf-screen-modaleditor .editor").html() + "</sizer>" 
+					);
+			});
+			
+			if($(".hmpdf-screen-modaleditor .editor .sizer").length > 0){
+				$(".hmpdf-screen-modaleditor .toolbar [command=_fontSize]").val($(".hmpdf-screen-modaleditor .editor .sizer").css("font-size").replace("px", ""));
+			}else{
+				$(".hmpdf-screen-modaleditor .toolbar [command=_fontSize]").val("16");
+			}
+			
 		});
 	});
     }
